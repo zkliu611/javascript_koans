@@ -37,10 +37,9 @@ describe("About Applying What We Have Learnt", function() {
 
   it("given I'm allergic to nuts and hate mushrooms, it should find a pizza I can eat (functional)", 
 
-    function () { //need test
       var productsICanEat = _(products).filter(
-        function (x) { 
-        return _(products).any(products.ingredients === "mushroom" && products.containsNut === false)  
+        function () { 
+        return _(products).any(products.ingredients === "mushroom" || products.containsNut === false)  
       });
       
       /* solve using filter() & all() / any() */
@@ -64,11 +63,12 @@ describe("About Applying What We Have Learnt", function() {
 
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
 
-    var sum = _(_.range(1,1001)).chain() //need test
+    var sum = _.chain(_.range(1, 1000)) 
+                     .filter(function(x) { return x % 3 === 0 || x % 5 === 0 })
                      .reduce(
-                      function (x){
-                        return (x % 3 === 0 || x % 5 === 0);
-                     })
+                       function(sum, x) {
+                         return sum + x;
+                         })
                      .value();
   /* try chaining range() and reduce() */
 
@@ -89,9 +89,9 @@ describe("About Applying What We Have Learnt", function() {
   });
 
   it("should count the ingredient occurrence (functional)", function () {
-    var ingredientCount = _(products.ingredients).chain()
-                            .flatten()
+    var ingredientCount = _(products).chain()
                             .map(function(x){return (x === )}) //need fix
+                            .flatten()
                             .reduce()  //need fix
                             .value()
     /* chain() together map(), flatten() and reduce() */
