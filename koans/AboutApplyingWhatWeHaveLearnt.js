@@ -36,11 +36,16 @@ describe("About Applying What We Have Learnt", function() {
   });
 
   it("given I'm allergic to nuts and hate mushrooms, it should find a pizza I can eat (functional)", 
+   /*need work */
 
-      var productsICanEat = _(products).filter(
-        function () { 
-        return _(products).any(products.ingredients === "mushroom" || products.containsNut === false)  
+       var productsICanEat = _.filter(products, function(pizza) {
+                              var doesContainMushroom = !_.any(pizza.ingredients, function(ingredient) {
+                              return (ingredient === "mushrooms");
+                             _.filter(function(pizza) {
+                              var doesAllergicIngredientExists = _.any(pizza.containsNuts === true);
+
       });
+      
       
       /* solve using filter() & all() / any() */
 
@@ -62,7 +67,7 @@ describe("About Applying What We Have Learnt", function() {
   });
 
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
-
+ /*completed*/
     var sum = _.chain(_.range(1, 1000)) 
                      .filter(function(x) { return x % 3 === 0 || x % 5 === 0 })
                      .reduce(
@@ -89,11 +94,18 @@ describe("About Applying What We Have Learnt", function() {
   });
 
   it("should count the ingredient occurrence (functional)", function () {
-    var ingredientCount = _(products).chain()
-                            .map(function(x){return (x === )}) //need fix
+    var ingredientCount = { "{ingredient name}": 0 };
+    var ingredientCount = _.chain(products)
+                            .map(function(item) {return [item.ingredients]}) 
                             .flatten()
-                            .reduce()  //need fix
-                            .value()
+                            .reduce(function(memo, ingredientName){
+                              if (ingredientName === "mushroom"){
+                                memo += 1;
+                              }
+                              return memo;
+                            }, 0)
+                            .value()     
+
     /* chain() together map(), flatten() and reduce() */
 
     expect(ingredientCount['mushrooms']).toBe(undefined);
